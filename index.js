@@ -9,8 +9,7 @@ const log = console.log;
 var winston = require('winston');
 require('winston-daily-rotate-file');
 
-var Web3 = require('web3');
-var web3 = new Web3();
+var watcherETH = require('./src/ethereum/watcher');
 
 var transport = new (winston.transports.DailyRotateFile)({
   filename: 'logs/application-%DATE%.log',
@@ -25,12 +24,6 @@ var logger = new (winston.Logger)({
     transport
   ]
 });
-
-const setProvider = () => {
-  const server = `http://${process.env.RPCHOST}:${process.env.RPCPORT}`;
-  log(chalk.yellow('Trying to connect', server));
-  web3.setProvider(new web3.providers.HttpProvider(server));
-}
 
 // connect to mongo db
 var isConnectedBefore = false;
@@ -67,14 +60,11 @@ mongoose.connection.on('disconnected', () => {
   logger.error(msg);
 });
 
-const blockWatcher = () => {
-
-}
-
 const startProcess = () => {
-  logger.info('Starting Process...');
-  setProvider();
-  blockWatcher();
+  var msg = 'Starting Process...';
+  log(msg);
+  logger.info(msg);
+  watcherETH.Start();
 }
 
 startProcess();

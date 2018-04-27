@@ -9,6 +9,7 @@
     "ethereum.js": "^0.2.4",
     "mongoose": "^5.0.16",
     "web3": "^0.20.4",
+    "web3-provider-engine": "^14.0.5",
     "winston": "^2.4.2",
     "winston-daily-rotate-file": "^3.1.3"
   },
