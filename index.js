@@ -2,6 +2,7 @@ process.stdin.resume(); //so the program will not close instantly
 
 require('dotenv').config();
 
+const app = require('./src/config/express');
 const mongoose = require('mongoose');
 const chalk = require('chalk');
 const log = console.log;
@@ -28,14 +29,18 @@ var logger = new (winston.Logger)({
 // connect to mongo db
 var isConnectedBefore = false;
 const connectDatabase = () => {
-  mongoose.connect(process.env.MONGODB_URI, {
-    auto_reconnect: true,
-    server: {
-      socketOptions: {
-        keepAlive: 9999999 * 9999999 * 9999999
+  if (process.env.MONGODB_URI != null | 'undefined') {
+    mongoose.connect(process.env.MONGODB_URI, {
+      auto_reconnect: true,
+      server: {
+        socketOptions: {
+          keepAlive: 9999999 * 9999999 * 9999999
+        }
       }
-    }
-  });
+    });
+  } else {
+    throw new Error('Please set up MongoDB connection.');
+  }
 }
 connectDatabase();
 
@@ -62,6 +67,12 @@ mongoose.connection.on('disconnected', () => {
 
 const startProcess = () => {
   var msg = 'Starting Process...';
+
+  // Listening the application
+  app.listen(process.env.PORT, () => {
+    console.info('☛ Ethereum Wallet Service');
+  });
+
   log(msg);
   logger.info(msg);
   watcherETH.Start();
