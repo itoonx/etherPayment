@@ -8,6 +8,7 @@
     "dotenv": "^5.0.1",
     "ethereum.js": "^0.2.4",
     "mongoose": "^5.0.16",
+    "redis": "^2.8.0",
     "web3": "^0.20.4",
     "web3-provider-engine": "^14.0.5",
     "winston": "^2.4.2",
