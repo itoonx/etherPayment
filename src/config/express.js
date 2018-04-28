@@ -2,10 +2,14 @@
 const express = require('express');
 const app = express();
 
+// setting-up express middleware
 const expressWinston = require('express-winston');
 const winstonInstance = require('./winston');
 const httpStatus = require('http-status');
 const APIError = require('../helpers/APIError');
+
+// load all router
+const routes = require('../server/routes');
 
 // enable detailed API logging in dev env
 if (process.env.ENV === 'development') {
@@ -19,7 +23,7 @@ if (process.env.ENV === 'development') {
   }));
 }
 
-app.get('/', (req, res) => res.send('Hello World!'));
+app.use('/api', routes);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
