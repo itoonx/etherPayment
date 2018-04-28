@@ -1,20 +1,10 @@
 
 const { promisify } = require('util');
-
-const Web3 = require('web3');
 const chalk = require('chalk');
-
 const redis = require("redis");
+const { web3, engine } = require('../config/web3provider');
+
 const client = redis.createClient();
-
-const ProviderEngine = require('web3-provider-engine/index.js');
-const ZeroClientProvider = require('web3-provider-engine/zero.js');
-
-const engine = ZeroClientProvider({
-  getAccounts: function(){},
-  rpcUrl: 'https://ropsten.infura.io/437dYfr0YRK9UHuIyByD',
-});
-const web3 = new Web3(engine);
 
 client.on("error", function (err) {
   throw new Error(err);
@@ -56,14 +46,14 @@ const Start = () => {
     console.log('================================');
     
     var block = await getBlock(blockhash);
-    var txs = await getTransactionByBlockHash(block);
+    // var txs = await getTransactionByBlockHash(block);
 
-    txs.map( async (tx, index) => {
+    // txs.map( async (tx, index) => {
 
-      var receipt = await decodeReceipt(tx);
+    //   // var receipt = await decodeReceipt(tx);
       
       
-    });
+    // });
   })
 }
 

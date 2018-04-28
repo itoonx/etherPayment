@@ -4,9 +4,14 @@ const app = express();
 
 // setting-up express middleware
 const expressWinston = require('express-winston');
+const bodyParser = require('body-parser');
 const winstonInstance = require('./winston');
 const httpStatus = require('http-status');
 const APIError = require('../helpers/APIError');
+
+// create application/json, urlencoded parser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // load all router
 const routes = require('../server/routes');
