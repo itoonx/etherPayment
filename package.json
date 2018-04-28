@@ -7,6 +7,9 @@
     "chalk": "^2.4.0",
     "dotenv": "^5.0.1",
     "ethereum.js": "^0.2.4",
+    "express": "^4.16.3",
+    "express-winston": "^2.5.1",
+    "http-status": "^1.0.1",
     "mongoose": "^5.0.16",
     "redis": "^2.8.0",
     "web3": "^0.20.4",
@@ -17,7 +20,8 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./index.js"
+    "start": "node ./index.js",
+    "dev": "nodemon ./index.js"
   },
   "author": "itoonx",
   "license": "ISC"
