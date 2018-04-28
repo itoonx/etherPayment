@@ -60,5 +60,6 @@ typings/
 # next.js build output
 .next
 
-# DS_Store
-**DS_Store
+# OS generated files #
+.DS_Store
+.DS_Store?
